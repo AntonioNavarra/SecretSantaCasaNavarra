@@ -576,6 +576,38 @@ details.extras[open] summary .plus { transform: rotate(45deg); }
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
+/* ---------- shuffle moment (shown between "Sorteggia" and the share list) ---------- */
+.shuffle {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 26px; padding: 24px; text-align: center; color: var(--paper-light);
+  background: radial-gradient(ellipse at 50% 40%, rgba(90, 15, 29, .9), rgba(40, 5, 12, .97));
+  animation: shuffle-in .3s ease-out both;
+}
+.shuffle[hidden] { display: none; }
+@keyframes shuffle-in { from { opacity: 0; } to { opacity: 1; } }
+.shuffle-stack { position: relative; width: 300px; height: 190px; }
+.shuffle-env {
+  position: absolute; left: 105px; top: 45px; width: 130px; height: 90px;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .45));
+  transform: translate(var(--x), var(--y)) rotate(var(--r));
+  animation: shuffle-env 1.25s ease-in-out 2 both;
+  animation-delay: calc(var(--i) * -.14s);
+}
+@keyframes shuffle-env {
+  0%   { transform: translate(var(--x), var(--y)) rotate(var(--r)); }
+  25%  { transform: translate(calc(var(--x) * -1), calc(var(--y) * -.5 - 16px)) rotate(calc(var(--r) * -1.2)); }
+  50%  { transform: translate(calc(var(--x) * .4), -24px) rotate(calc(var(--r) * .5)); }
+  75%  { transform: translate(calc(var(--x) * -.6), 10px) rotate(calc(var(--r) * -.8)); }
+  100% { transform: translate(var(--x), var(--y)) rotate(var(--r)); }
+}
+.shuffle-spark { position: absolute; animation: twinkle 1s ease-in-out infinite; }
+.shuffle-title {
+  margin: 0; font-family: var(--script); font-weight: 400;
+  font-size: clamp(2.6rem, 13vw, 3.4rem); line-height: 1.05; color: #f6dca0;
+}
+.shuffle-sub { margin: 0; font-size: 1.25rem; opacity: .88; max-width: 16em; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
@@ -779,6 +811,45 @@ details.extras[open] summary .plus { transform: rotate(45deg); }
   </section>
 
 </main>
+<div class="shuffle" id="shuffle" role="status" hidden>
+  <div class="shuffle-stack" aria-hidden="true">
+    <svg class="shuffle-env" style="--r:-34deg;--x:-70px;--y:20px;--i:0" width="130" height="90" viewBox="0 0 130 90" aria-hidden="true">
+      <rect x="2" y="2" width="126" height="86" rx="8" fill="#a41f35"/>
+      <path d="M2 6l63 42 63-42" fill="none" stroke="#5e0e1c" stroke-width="3"/>
+      <circle cx="65" cy="46" r="12" fill="#c59a4a" stroke="#8a6420" stroke-width="2"/>
+      <path d="M65 38l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#8a6420"/>
+    </svg>
+    <svg class="shuffle-env" style="--r:-18deg;--x:-38px;--y:10px;--i:1" width="130" height="90" viewBox="0 0 130 90" aria-hidden="true">
+      <rect x="2" y="2" width="126" height="86" rx="8" fill="#8c1830"/>
+      <path d="M2 6l63 42 63-42" fill="none" stroke="#5e0e1c" stroke-width="3"/>
+      <circle cx="65" cy="46" r="12" fill="#c59a4a" stroke="#8a6420" stroke-width="2"/>
+      <path d="M65 38l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#8a6420"/>
+    </svg>
+    <svg class="shuffle-env" style="--r:0deg;--x:0px;--y:0px;--i:2" width="130" height="90" viewBox="0 0 130 90" aria-hidden="true">
+      <rect x="2" y="2" width="126" height="86" rx="8" fill="#b32840"/>
+      <path d="M2 6l63 42 63-42" fill="none" stroke="#5e0e1c" stroke-width="3"/>
+      <circle cx="65" cy="46" r="12" fill="#c59a4a" stroke="#8a6420" stroke-width="2"/>
+      <path d="M65 38l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#8a6420"/>
+    </svg>
+    <svg class="shuffle-env" style="--r:16deg;--x:38px;--y:-6px;--i:3" width="130" height="90" viewBox="0 0 130 90" aria-hidden="true">
+      <rect x="2" y="2" width="126" height="86" rx="8" fill="#9b1b30"/>
+      <path d="M2 6l63 42 63-42" fill="none" stroke="#5e0e1c" stroke-width="3"/>
+      <circle cx="65" cy="46" r="12" fill="#c59a4a" stroke="#8a6420" stroke-width="2"/>
+      <path d="M65 38l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#8a6420"/>
+    </svg>
+    <svg class="shuffle-env" style="--r:30deg;--x:72px;--y:-14px;--i:4" width="130" height="90" viewBox="0 0 130 90" aria-hidden="true">
+      <rect x="2" y="2" width="126" height="86" rx="8" fill="#a41f35"/>
+      <path d="M2 6l63 42 63-42" fill="none" stroke="#5e0e1c" stroke-width="3"/>
+      <circle cx="65" cy="46" r="12" fill="#c59a4a" stroke="#8a6420" stroke-width="2"/>
+      <path d="M65 38l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#8a6420"/>
+    </svg>
+    <svg class="shuffle-spark" style="left:12px;top:8px" width="30" height="30" viewBox="0 0 30 30"><path d="M15 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#ffd98a"/></svg>
+    <svg class="shuffle-spark" style="right:10px;top:30px;animation-delay:.4s" width="22" height="22" viewBox="0 0 30 30"><path d="M15 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#ffd98a"/></svg>
+  </div>
+  <p class="shuffle-title">Sto mescolando<br>i biglietti…</p>
+  <p class="shuffle-sub">Un attimo e ognuno<br>ha la sua busta.</p>
+</div>
+
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1236,7 +1307,19 @@ if (typeof window !== "undefined" && typeof document !== "undefined") (function 
     renderCreate();
   });
 
+  // a short suspense moment between "Sorteggia" and the list; skipped with reduced motion
+  let drawing = false;
+  function playShuffle() {
+    return new Promise((resolve) => {
+      if (reduceMotion) { resolve(); return; }
+      const overlay = $("shuffle");
+      overlay.hidden = false;
+      setTimeout(() => { overlay.hidden = true; resolve(); }, 2600);
+    });
+  }
+
   $("draw-btn").addEventListener("click", () => {
+    if (drawing) return;
     const err = $("draw-error");
     err.textContent = "";
     // a name typed but not yet added counts too
@@ -1264,9 +1347,13 @@ if (typeof window !== "undefined" && typeof document !== "undefined") (function 
     }));
     const share = { rows, budget, when };
     try { sessionStorage.setItem(STORE_KEY, JSON.stringify(share)); } catch (e) { /* private mode */ }
-    renderShare(share);
-    show("screen-share");
-    $("share-title").focus({ preventScroll: true });
+    drawing = true;
+    playShuffle().then(() => {
+      renderShare(share);
+      show("screen-share");
+      $("share-title").focus({ preventScroll: true });
+      drawing = false;
+    });
   });
 
   /* ================= SHARE ================= */
